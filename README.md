@@ -47,3 +47,22 @@ terraform apply plan.out
 ```
 
 Once Terraform finishes its' run in the terminal as outputs you will see generated kubeconfig and Atlantis endpoint DNS name
+
+## Cluster verification
+To use eks-admin and eks-readonly roles to manage EKS cluster assume role using AWS cli and then export keys (use two different terminal windows):
+```terraform
+aws sts assume-role --role-arn "arn:aws:iam::<aws-account-id>:role/eks_admin" --role-session-name eks_admin_role`
+```
+```terraform
+export AWS_ACCESS_KEY_ID=ExampleAccessKeyID1
+export AWS_SECRET_ACCESS_KEY=ExampleSecretKey1
+export AWS_SESSION_TOKEN=ExampleSessionToken1
+```
+```terraform
+aws sts assume-role --role-arn "arn:aws:iam::<aws-account-id>:role/eks_readonly" --role-session-name eks_readonly_role
+```
+```terraform
+export AWS_ACCESS_KEY_ID=ExampleAccessKeyID2
+export AWS_SECRET_ACCESS_KEY=ExampleSecretKey2
+export AWS_SESSION_TOKEN=ExampleSessionToken2
+```
