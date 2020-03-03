@@ -13,15 +13,15 @@ After applying this Terraform project code you will have:
 * 1 VPC with two subnets (one private subnet and one public subnet)
 * 1 EKS cluster configured for autoscaling
 * Workers autoscaling group and with min=1, max=2 worker nodes
-* Workers security groups whcih allow to use AWS bastion host in public subnet
+* Workers security groups which allow to use AWS bastion host in public subnet to access worker nodes in public subnet
 * K8s RBAC configured with to IAM roles: eks-admin and eks-readonly
-* Atlantis deployment on EKS cluster and exposed to world using ELB
+* Atlantis deployment on EKS cluster which is exposed to world using ELB
 
 ## Prerequisites to deploy code
-To deploy code your workstation need to have:
-* Terraform v0.12.21 
+To deploy code your workstation need to have installed software listed below:
+* Terraform v0.12.21
 * aws-cli (if using MacOS:  `brew install aws-cli` and then `aws configure` to configure AWS credentials)
-* jq JSON processor (ff using MacOS: `brew install jq`)
+* jq JSON processor (if using MacOS: `brew install jq`)
 * aws-iam-authenticator (if using MacOs: `brew install aws-iam-authenticator`)
 
 ## Deployment procedure
@@ -49,7 +49,7 @@ terraform apply plan.out
 Once Terraform finishes its' run in the terminal as outputs you will see generated kubeconfig and Atlantis endpoint DNS name
 
 ## Cluster verification
-To use eks-admin and eks-readonly roles to manage EKS cluster assume role using AWS cli and then export keys (use two different terminal windows):
+To use eks-admin and eks-readonly roles to manage EKS cluster assume role using AWS cli and then export keys (to test use two different terminal windows):
 ```terraform
 aws sts assume-role --role-arn "arn:aws:iam::<aws-account-id>:role/eks_admin" --role-session-name eks_admin_role`
 ```
